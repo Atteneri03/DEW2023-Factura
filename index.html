@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table {
+      border: black 1px solid;
+      border-collapse: collapse;
+    }
+    td, th {
+      border: black 1px solid;
+      border-collapse: collapse;
+    }
+    thead {
+      background-color: blue;
+      color: white;
+    }
+    
+    tbody {
+      background-color: lightblue;
+
+    }
+
+  </style>
+</head>
+<body>
+  <h2>Factura</h2>
+
+<div align = "center">
+
+    <label>Concepto <input type="text" name="concept"/></label> <br />
+    <label>Cantidad <input type="number" name="cant"/></label> <br />
+    <label>Precio <input type="number" name="price"/>€</label> <br />
+    <br>
+    <button onclick="add()">Insertar</button>
+
+
+  <br>
+
+  <table class = "facture">
+    <thead>
+      <tr>
+        <th>Concepto</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+        <th>Precio Total</th>
+        <th> </th>
+      </tr>  
+    </thead>
+    
+    <tbody>
+
+      <tr>
+        <td rowspan="1" colspan="3">Subtotal</td>
+        <td>0.00€</td> 
+        <td> </td> <!--X-->
+      </tr>
+
+      <tr>
+        <td>Tasa:</td>
+        <td style="color: red;"><strong>5%</strong></td> <!--5-15-30%-->
+        <td>Impuestos:</td> 
+        <td>0.00€</td>
+        <td> </td> <!--X-->
+      </tr>
+
+      <tr>
+        <td rowspan="1" colspan="3">TOTAL</td>
+        <td>0.00€</td>
+        <td> </td>
+      </tr>
+
+    </tbody>
+    
+      
+  </table>
+
+  <input type="submit" value="Tasa 5%" />
+  <input type="submit" value="Tasa 10%" />
+  <input type="submit" value="Tasa 15%" />
+
+</div>
+
+<script>
+  function add() {
+    let concept = document.getElementsByName("concept")[0];
+    let cant = document.getElementsByName("cant")[0];
+    let price = document.getElementsByName("price")[0];
+
+    let element1 = `<td>${concept}</td>`;
+    let element2 = `<td>${cant}</td>`;
+    let element3 = `<td>${price}</td>`;
+  }
+</script>
+</body>
+</html>
