@@ -30,16 +30,16 @@
 
 <div align = "center">
 
-    <label>Concepto <input type="text" name="concept"/></label> <br />
-    <label>Cantidad <input type="number" name="cant"/></label> <br />
-    <label>Precio <input type="number" name="price"/>€</label> <br />
+    <label>Concepto <input type="text" id="concept"/></label> <br />
+    <label>Cantidad <input type="number" id="cant"/></label> <br />
+    <label>Precio <input type="number" id="price"/>€</label> <br />
     <br>
     <button onclick="add()">Insertar</button>
 
 
   <br>
 
-  <table class = "facture">
+  <table id = "facture">
     <thead>
       <tr>
         <th>Concepto</th>
@@ -85,13 +85,61 @@
 
 <script>
   function add() {
-    let concept = document.getElementsByName("concept")[0];
-    let cant = document.getElementsByName("cant")[0];
-    let price = document.getElementsByName("price")[0];
+    // let concept = document.getElementsByName("concept")[0];
+    // let cant = document.getElementsByName("cant")[0];
+    // let price = document.getElementsByName("price")[0];
 
-    let element1 = `<td>${concept}</td>`;
-    let element2 = `<td>${cant}</td>`;
-    let element3 = `<td>${price}</td>`;
+    // console.log(concept);
+
+    // let element1 = `<td>${concept}</td>`;
+    // let element2 = `<td>${cant}</td>`;
+    // let element3 = `<td>${price}</td>`;
+
+    // // Obtén la referencia a la tabla por su id
+    // var tabla = document.getElementById("facture");
+
+    // // Crea una nueva fila y celdas
+    // var newRow = tabla.insertRow(0);
+    // var nuevaCelda1 = newRow.insertCell(0);
+    // var nuevaCelda2 = newRow.insertCell(1);
+    // var nuevaCelda3 = newRow.insertCell(2);
+
+
+    // // Añade contenido a las celdas
+    // nuevaCelda1.appendChild = element1;
+    // nuevaCelda2.appendChild = element2;
+    // nuevaCelda3.appendChild = element3;
+
+    // Obtén los valores de los inputs
+    var concept = document.getElementById("concept").value;
+    var cant = document.getElementById("cant").value;
+    var price = document.getElementById("price").value;
+
+
+    // Obtén la referencia a la tabla
+    var tabla = document.getElementById("facture");
+
+    // Crea una nueva fila y celdas
+    var newRow = tabla.insertRow(1);
+    var conceptCell = newRow.insertCell(0);
+    var cantCell = newRow.insertCell(1);
+    var priceCell = newRow.insertCell(2);
+    var totalCell = newRow.insertCell(3);
+
+
+
+    // Añade los valores a las celdas
+    conceptCell.innerHTML = concept;
+    cantCell.innerHTML = cant;
+    priceCell.innerHTML = parseFloat(price).toFixed(2);
+    totalCell.innerHTML = parseFloat(price * cant).toFixed(2) + "€";
+
+
+    // Limpia los valores de los inputs
+    document.getElementById("concept").value = "";
+    document.getElementById("cant").value = "";
+    document.getElementById("price").value = "";
+
   }
 </script>
 </body>
