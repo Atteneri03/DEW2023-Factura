@@ -84,6 +84,7 @@
 </div>
 
 <script>
+  var suma = 0;
   function add() {
 
     // Obtén los valores de los inputs
@@ -120,7 +121,7 @@
     var totals = document.querySelectorAll("#subtotal");
     
     // Inicializa una variable para almacenar la suma
-    var suma = 0;
+    suma = 0;
 
     // Itera sobre los elementos y suma sus valores convertidos a números
     totals.forEach(function(elemento) {
@@ -129,6 +130,7 @@
     });
 
     document.getElementById("total").innerHTML = suma.toFixed(2) + "€";
+    applyTax(5);
 
     // Limpia los valores de los inputs
     document.getElementById("concept").value = "";
@@ -146,6 +148,7 @@
     for (var i = 0; i < tabla.rows.length; i++) {
         if (tabla.rows[i] === row) {
             tabla.deleteRow(i);
+            applyTax(5);
             break;
         }
     }
@@ -163,6 +166,7 @@
     });
 
     document.getElementById("total").innerHTML = suma.toFixed(2) + "€";
+    
 
   }
 
@@ -187,19 +191,24 @@
     switch (newTax) {
       case 5:
         document.getElementById("increment").innerHTML = ((suma * 5) / 100).toFixed(2) + "€";
-        document.getElementById("TOTAL").innerHTML;
+        document.getElementById("TOTAL").innerHTML = (suma + parseFloat(((suma * 5) / 100).toFixed(2))).toFixed(2);
         break;
       case 15:
         document.getElementById("increment").innerHTML = ((suma * 15) / 100).toFixed(2) + "€";
+        document.getElementById("TOTAL").innerHTML = (suma + parseFloat(((suma * 15) / 100).toFixed(2))).toFixed(2);
+
         break;
       case 30:
         document.getElementById("increment").innerHTML = ((suma * 30) / 100).toFixed(2) + "€";
+        document.getElementById("TOTAL").innerHTML = (suma + parseFloat(((suma * 30) / 100).toFixed(2))).toFixed(2);
         break;
     
     }
 
     
   }
+
+  
 </script>
 </body>
 </html>
