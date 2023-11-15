@@ -162,7 +162,7 @@
 
     //Dependiendo de la tasa que se indique, calculo el incremento y el total
     document.getElementById("increment").innerHTML = ((suma * newTax) / 100).toFixed(2) + "€";
-    document.getElementById("TOTAL").innerHTML = (suma + parseFloat(((suma * newTax) / 100).toFixed(2))).toFixed(2);
+    document.getElementById("TOTAL").innerHTML = (suma + parseFloat(((suma * newTax) / 100).toFixed(2))).toFixed(2) + "€";
 
     
   }
@@ -172,12 +172,12 @@
     //sumo el total de cada producto al subtotal
     var totals = document.querySelectorAll("#subtotal");
     
-    // Inicializa una variable para almacenar la suma
+    // Inicializo una variable para almacenar la suma
     var suma = 0;
 
-    // Itera sobre los elementos y suma sus valores convertidos a números
+    // Recorro los elementos y sumo los valores convertidos a números
     totals.forEach(function(elemento) {
-        // Convierte el contenido a número y suma
+        // Convierto el contenido a número y lo sumo
         suma += parseFloat(elemento.textContent);
     });
 
