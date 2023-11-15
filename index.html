@@ -87,16 +87,16 @@
   var suma = 0;
   function add() {
 
-    // Obtén los valores de los inputs
+    // Obtengo los valores de los inputs
     var concept = document.getElementById("concept").value;
     var cant = document.getElementById("cant").value;
     var price = document.getElementById("price").value;
 
 
-    // Obtén la referencia a la tabla
+    // Obtengo la referencia a la tabla
     var tabla = document.getElementById("facture");
 
-    // Crea una nueva fila y celdas
+    // Creo una nueva fila y celdas
     var newRow = tabla.insertRow(1);
     var conceptCell = newRow.insertCell(0);
     var cantCell = newRow.insertCell(1);
@@ -104,10 +104,7 @@
     var totalCell = newRow.insertCell(3);
     var x = newRow.insertCell(4);
 
-
-
-
-    // Añade los valores a las celdas
+    // Añado los valores a las celdas
     conceptCell.innerHTML = concept;
     cantCell.innerHTML = cant;
     priceCell.innerHTML = parseFloat(price).toFixed(2);
@@ -117,19 +114,11 @@
     x.onclick = () => remove(newRow);
 
 
-    //sumo el total de cada producto al subtotal
-    var totals = document.querySelectorAll("#subtotal");
-    
-    // Inicializa una variable para almacenar la suma
-    suma = 0;
-
-    // Itera sobre los elementos y suma sus valores convertidos a números
-    totals.forEach(function(elemento) {
-        // Convierte el contenido a número y suma
-        suma += parseFloat(elemento.textContent);
-    });
-
+    //Calculo el subtotal
+    var suma = sumElements();
     document.getElementById("total").innerHTML = suma.toFixed(2) + "€";
+
+    //por defecto aplico el impuesto del 5%
     applyTax(5);
 
     // Limpia los valores de los inputs
@@ -142,40 +131,44 @@
 
 
   function remove(row){
-    //Obtén la referencia a la tabla
+    //Obtengo la referencia a la tabla
     var tabla = document.getElementById("facture");
 
+    //recorro la tabla buscando la fila en concreto
     for (var i = 0; i < tabla.rows.length; i++) {
         if (tabla.rows[i] === row) {
             tabla.deleteRow(i);
+            //por defecto aplico el impuesto del 5%
             applyTax(5);
             break;
         }
     }
 
-    //sumo el total de cada producto al subtotal
-    var totals = document.querySelectorAll("#subtotal");
-    
-    // Inicializa una variable para almacenar la suma
-    var suma = 0;
-
-    // Itera sobre los elementos y suma sus valores convertidos a números
-    totals.forEach(function(elemento) {
-        // Convierte el contenido a número y suma
-        suma += parseFloat(elemento.textContent);
-    });
-
+    //vuelvo a calcular el subtotal
+    var suma = sumElements();
     document.getElementById("total").innerHTML = suma.toFixed(2) + "€";
-    
-
   }
 
 
 
+  //Calculo el impuesto
   function applyTax (newTax){
+    //Cambio la tasa que se muestra dependiendo del botón que pulse
      var tax = document.getElementById("tax");
-     tax.innerHTML = newTax + "%";
+     tax.innerHTML = "<strong>" + newTax + "%" + "</strong>";
 
+     //Aquí llamo a la función porque la voy a necesitar luego
+     var suma = sumElements();
+
+    //Dependiendo de la tasa que se indique, calculo el incremento y el total
+    document.getElementById("increment").innerHTML = ((suma * newTax) / 100).toFixed(2) + "€";
+    document.getElementById("TOTAL").innerHTML = (suma + parseFloat(((suma * newTax) / 100).toFixed(2))).toFixed(2);
+
+    
+  }
+  
+
+  function sumElements(){
     //sumo el total de cada producto al subtotal
     var totals = document.querySelectorAll("#subtotal");
     
@@ -188,26 +181,8 @@
         suma += parseFloat(elemento.textContent);
     });
 
-    switch (newTax) {
-      case 5:
-        document.getElementById("increment").innerHTML = ((suma * 5) / 100).toFixed(2) + "€";
-        document.getElementById("TOTAL").innerHTML = (suma + parseFloat(((suma * 5) / 100).toFixed(2))).toFixed(2);
-        break;
-      case 15:
-        document.getElementById("increment").innerHTML = ((suma * 15) / 100).toFixed(2) + "€";
-        document.getElementById("TOTAL").innerHTML = (suma + parseFloat(((suma * 15) / 100).toFixed(2))).toFixed(2);
-
-        break;
-      case 30:
-        document.getElementById("increment").innerHTML = ((suma * 30) / 100).toFixed(2) + "€";
-        document.getElementById("TOTAL").innerHTML = (suma + parseFloat(((suma * 30) / 100).toFixed(2))).toFixed(2);
-        break;
-    
-    }
-
-    
+    return suma;
   }
-
   
 </script>
 </body>
